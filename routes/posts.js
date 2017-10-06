@@ -35,7 +35,7 @@ router.get("/:id", function(req, res){
 
 // edit
 router.get("/:id/edit", function(req, res){
-  Post.findOne({_id:req.params.id}, funcion(err, post){
+  Post.findOne({_id:req.params.id}, function(err, post){
     if(err) return res.json(err);
     res.render("posts/edit", {post:post});
   });
@@ -46,13 +46,13 @@ router.put("/:id", function(req, res){
   req.body.updatedAt = Date.now();
   Post.findOneAndUpdate({_id:req.params.id}, req.body, function(err, post){
     if(err) return res.json(err);
-    res.redirect("posts/"+req.params.id);
+    res.redirect("/posts/"+req.params.id);
   });
 });
 
 // destroy
 router.delete("/:id", function(req, res){
-  Post.remove({_id:req.parmas.id}, function(err){
+  Post.remove({_id:req.params.id}, function(err){
     if(err) return res.json(err);
     res.redirect("/posts");
   });
